@@ -26,6 +26,11 @@ What's included:
   * `PROJECT_STANDARDS.md`: Example coding style guide
   * `PROJECT_ARCHITECTURE.md`: Example project blueprint
 
+Example of `CLIPPY.md` verification step:
+<p align="center">
+  <img src="img/scr1.png" alt="CLIPPY.md Verification Example" />
+</p>
+
 ## The Toolkit
 
 ### Process Guides
@@ -69,6 +74,3 @@ Coding-Clippy is designed for immediate use, helping AI coding tools follow a st
     *   Use `@PLANNER.md` only when you need a formal, standalone implementation plan for complex architectural changes, major refactorings, or multi-component features that require extensive upfront planning and possibly stakeholder review.
     *   Example usage: "`@PLANNER.md` Create a plan for adding OAuth 2.0 authentication across our microservice architecture."
     *   (Currently in Alpha status - see `KNOWN_ISSUES.md` for details)
-
-Example of `CLIPPY.md` verification step:
-![CLIPPY.md Verification Example](img/scr1.png)
