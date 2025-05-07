@@ -34,6 +34,7 @@ What's included:
 
 * **`PLANNER.md`**: For when a formal, standalone implementation plan is needed before diving into code.
   * Usage: `@PLANNER.md Create a plan for adding OAuth...`
+  * Example usage: "`@PLANNER.md` Create a plan for adding OAuth 2.0 authentication across our microservice architecture."
   * (Currently in Alpha status - see `KNOWN_ISSUES.md` for details)
 
 ### Example Project Configuration (in `example_supporting_documents/`)
@@ -68,3 +69,6 @@ Coding-Clippy is designed for immediate use, helping AI coding tools follow a st
     *   Use `@PLANNER.md` only when you need a formal, standalone implementation plan for complex architectural changes, major refactorings, or multi-component features that require extensive upfront planning and possibly stakeholder review.
     *   Example usage: "`@PLANNER.md` Create a plan for adding OAuth 2.0 authentication across our microservice architecture."
     *   (Currently in Alpha status - see `KNOWN_ISSUES.md` for details)
+
+Example of `CLIPPY.md` verification step:
+![CLIPPY.md Verification Example](img/scr1.png)
