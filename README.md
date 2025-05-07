@@ -13,6 +13,8 @@ AI coding tools are happy to:
 * Make assumptions instead of checking your actual codebase
 * Overlook important dependencies and side effects
 
+Coding-Clippy is here to get your AI back on track.
+
 ## The AI Coding Tool Guide
 
 Coding-Clippy acts as a guide for AI coding tools. This toolkit works with the Cursor environment and gemini-2.5-pro model to mitigate common AI coding pitfalls. It's easy to use and "just works".
