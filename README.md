@@ -68,6 +68,3 @@ Coding-Clippy is designed for immediate use, helping AI coding tools follow a st
     *   Use `@PLANNER.md` only when you need a formal, standalone implementation plan for complex architectural changes, major refactorings, or multi-component features that require extensive upfront planning and possibly stakeholder review.
     *   Example usage: "`@PLANNER.md` Create a plan for adding OAuth 2.0 authentication across our microservice architecture."
     *   (Currently in Alpha status - see `KNOWN_ISSUES.md` for details)
-
-4.  **Ensure Document Accessibility:**
-    *   Make sure the AI coding tool has access to `CLIPPY.md`, `PLANNER.md`, and (when created) your project-specific `PROJECT_STANDARDS.md` and `PROJECT_ARCHITECTURE.md`.
