@@ -75,7 +75,7 @@ For the best results, integrate Coding-Clippy into your project and customize it
     This keeps the toolkit updated and separate from your project's codebase.
     ```bash
     # In your project's root directory:
-    git submodule add https://github.com/Gunther-Schulz external/coding-clippy
+    git submodule add https://github.com/Gunther-Schulz/coding-clippy
     git submodule update --init --recursive
     ```
 
