@@ -5,25 +5,6 @@
 -->
 ## [Unreleased]
 
-## [0.2.23] - 2025-05-11
-**Affected Document(s):**
-*   `coding-clippy/CLIPPY.MD`
-
-**Summary of Changes:**
-Refined the trigger for Step `3.4.0.b` ("Assess Target Code Complexity & Propose Refactoring (If Needed)") in `CLIPPY.MD`. The updated trigger more explicitly addresses scenarios where *already complex code* is being modified, ensuring that even non-substantial further modifications prompt a refactoring proposal. This aims to prevent the exacerbation of complexity in code that is already difficult to maintain.
-
-**Detailed Changes to `coding-clippy/CLIPPY.MD`:**
-
-1.  **Modified Trigger for Step `3.4.0.b` ("Assess Target Code Complexity & Propose Refactoring (If Needed)"):**
-    *   The previous trigger was: "If the target code block (e.g., a function, method) is assessed as already being excessively complex, OR if the AI's *current plan* involves adding substantial new logic or significant modifications to it that would, upon implementation, make the resulting code block excessively complex..."
-    *   The new trigger is structured into two primary conditions:
-        1.  "**Modification of Already Complex Code:** If the target code block is assessed as *already being excessively complex*, AND the AI's current plan involves *any non-trivial modifications or additions* to it. (Rationale: Modifying already complex code, even with seemingly minor changes, often increases risk and maintenance burden, making pre-emptive refactoring highly desirable.)"
-        2.  "**Creation of Newly Complex Code:** If the target code block is *not currently assessed as excessively complex*, BUT the AI's current plan involves adding *substantial new logic or significant modifications* to it that *would, upon implementation, make the resulting code block excessively complex*."
-    *   An assessment note clarifies factors for "excessively complex".
-
-2.  **Toolkit Component Version Update:**
-    *   Incremented version in `CLIPPY.MD` from `v0.2.22` to `v0.2.23`.
-
 ## [0.2.22] - 2025-05-10
 **Affected Document(s):**
 *   `coding-clippy/CLIPPY.md`

@@ -5,7 +5,7 @@
 **Goal:** To improve consistency and proactively catch deviations from standards by incorporating explicit checks **and reporting** into the workflow, ensuring a strong emphasis on fundamentally robust solutions over quick fixes or workarounds.
 **Interaction Model:** This process assumes **autonomous execution** by the AI, with user intervention primarily reserved for points explicitly marked with the literal text `**BLOCKER:**`. These points are identified within the procedures. Therefore, meticulous self-verification and clear, proactive reporting as outlined below are paramount for demonstrating adherence.
 
-**Toolkit Component Version: Belongs to AI Collaboration Toolkit v0.2.23. See CHANGELOG.md for detailed history.**
+**Toolkit Component Version: Belongs to AI Collaboration Toolkit v0.2.24. See CHANGELOG.md for detailed history.**
 
 ---
 
@@ -20,6 +20,7 @@
     *   [Step 3: Pre-computation Standards Check (Planning)](#3-pre-computation-standards-check-planning-phase)
         *   [3.0. Assess Target File Complexity & Ensure Sufficient Context (Initial Check)](#30-assess-target-file-complexity--ensure-sufficient-context-initial-check)
         *   [3.0.1. Verify Tool Output Congruence and Sufficiency (After Information Gathering)](#301-verify-tool-output-congruence-and-sufficiency-after-information-gathering)
+        *   [3.0.2. Re-evaluate Prior Planning Sub-steps if New Critical Context is Obtained](#302-re-evaluate-prior-planning-sub-steps-if-new-critical-context-is-obtained)
     *   [Step 4: Edit Generation & Verification Cycle](#4-edit-generation--verification-cycle)
     *   [Step 5: Adherence Checkpoint](#5-adherence-checkpoint-final-step-in-cycle-critical)
     *   [Step 6: Summarize Deferred Observations (Optional)](#6-summarize-deferred-observations-optional)
@@ -154,6 +155,16 @@ When responding to user requests involving code analysis, planning, or modificat
     4.  **Report Outcome:** Concisely state the outcome of this verification (e.g., "Output of `read_file` for `xyz.py` verified, content is sufficient for planning.", "Initial `grep_search` for '\''MyClass'\'' was truncated; re-running with `include_pattern='*.py'` for better focus. Output verified and sufficient.", "Output of `list_dir` for `src/utils` verified and sufficient.").
 *   **Next Step:** Only after successful verification (or explicit acknowledgment of proceeding with limitations), use the tool's output for subsequent planning sub-steps (e.g., 3.1, 3.2, etc.).
 
+**3.0.2. Re-evaluate Prior Planning Sub-steps if New Critical Context is Obtained:**
+*   **Trigger:** If the verification in Step `3.0.1` confirms that *new, more complete, or substantially different critical file content* (especially for files central to the planning task, like the primary target of modification) was obtained *after* some of the planning sub-steps (e.g., 3.1 through 3.9, particularly `3.2. Identify Standards & Verify Alignment`, `3.4. Check "Robust Solutions"`, and `3.4.0.b Assess Target Code Complexity & Propose Refactoring`) were initially performed based on incomplete or less detailed information.
+*   **Action:**
+    1.  The AI **MUST** explicitly acknowledge that new/better context is now available for `[filename(s)]`.
+    2.  The AI **MUST** then revisit and re-evaluate any planning sub-steps from 3.1 through 3.9 (especially `3.2. Identify Standards & Verify Alignment`, `3.4. Check "Robust Solutions"`, and `3.4.0.b Assess Target Code Complexity & Propose Refactoring`) that were:
+        a.  Previously completed based on what is now understood to be incomplete or less detailed information for the newly fully-obtained file(s).
+        b.  Are directly impacted by the more complete context of these files.
+    3.  The AI **MUST** report the outcome of this re-evaluation, highlighting any changes to the plan or assessments (e.g., "Re-assessing code complexity of `dxf_writer.py` with full content. Previous assessment was X, new assessment is Y based on the complete file content. The plan will now proceed based on this updated assessment.").
+*   **Rationale:** Ensures that all planning decisions, especially those concerning code complexity, impact, and standards alignment, are based on the most complete and accurate information available before proceeding to generate edits. This prevents carrying forward outdated assessments made with insufficient context.
+
 **NOTE:** Foundational checks (Steps 3.4, 3.5, 3.6) take precedence. If analysis reveals underlying issues (robustness, unknown root cause, architectural conflicts), these **MUST** be addressed by **STOPPING the standard plan and executing the appropriate procedure from Section 5: `Exception Handling Procedures`** *before* proceeding with the original task. Embrace necessary detours.
 
 *   **Trigger:** Before generating a multi-step plan or proposing a specific code edit (`edit_file` call).
@@ -259,7 +270,7 @@ When responding to user requests involving code analysis, planning, or modificat
         - `[x/-] 4. Logic Preservation Plan:` *[Brief confirmation `Procedure: Ensure Logic Preservation` (3.4.1.e) performed if applicable. Mark `[x]` if done, `[-]` if N/A.]*
         - `[x/-] 5. Blocker Checks:` *[Brief confirmation blocker checks (3.5/3.6) performed and guidance sought/received via Section 5 procedures if triggered. Mark `[x]` if checked & resolved/approved, `[-]` if N/A.]*
         - `[x] 6. Confirmation:` Pre-computation verification summary complete. *(Always `[x]`)*
-        - `[x/-] 7. Tool Output Verification:` *[Brief confirmation that all tool outputs used in planning were verified for congruence and sufficiency as per Step 3.0.1.]*
+        - `[x/-] 7. Tool Output Verification:` *[Brief confirmation that all tool outputs used in planning were verified for congruence and sufficiency as per Step 3.0.1, and that any necessary re-evaluations per Step 3.0.2 were completed.]*
         ```
         *(Note: This summary serves as mandatory proof that pre-computation checks were completed autonomously before proceeding. Explicit justification is required for any step marked N/A.)*
 
