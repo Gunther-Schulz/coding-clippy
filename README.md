@@ -39,7 +39,6 @@ Coding-Clippy offers a set of guides and resources to improve AI-assisted coding
     *   `learning_resources/`: Educational materials on AI behavior and best practices.
     *   `CHANGELOG.md`: Tracks updates to the toolkit.
     *   `KNOWN_ISSUES.md`: Lists current limitations.
-    *   `CLIPPY_Optional_Additions.md`: Experimental ideas for `CLIPPY.md`.
     *   `TODO.md`: Planned enhancements and features.
 
 ## Getting Started with Coding-Clippy
@@ -76,14 +75,13 @@ For the best results, integrate Coding-Clippy into your project and customize it
     ```bash
     # In your project's root directory:
     git submodule add https://github.com/Gunther-Schulz/coding-clippy
-    git submodule update --init --recursive
     ```
 
 *   **Create Your Project-Specific Documents:**
     *   Develop `PROJECT_STANDARDS.md` and `PROJECT_ARCHITECTURE.md` files **within your own project**.
     *   **Note:** Do not rename these files. `CLIPPY.md` and `PLANNER.md` refer to them by these exact names.
     *   Use the examples in this toolkit's `templates/` folder (e.g., `external/coding-clippy/templates/`) as a starting point.
-    *   When using `@CLIPPY.md` or `@PLANNER.md`, include your project-specific documents by adding them to the chat prompt using the `@` mention (e.g., `@PROJECT_STANDARDS.md` and `@PROJECT_ARCHITECTURE.md`).
+    *   For `CLIPPY.md` or `PLANNER.md` to access and utilize the contents of your project-specific documents (like `PROJECT_STANDARDS.md` and `PROJECT_ARCHITECTURE.md`), you **must** include them in the chat prompt alongside `@CLIPPY.md` or `@PLANNER.md` using the `@` mention (e.g., `@PROJECT_STANDARDS.md @PROJECT_ARCHITECTURE.md`). This ensures they are part of the AI's active context.
     *   Tailoring these documents allows `CLIPPY.md` to guide the AI with much greater relevance to your codebase.
     *   **Example of using `CLIPPY.md` with custom project documents:**
         *   Assuming you have `PROJECT_STANDARDS.md` and `PROJECT_ARCHITECTURE.md` in your project:

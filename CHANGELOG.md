@@ -1,4 +1,303 @@
-**(Note for AI Assistant: Use `date +%F` for current date. Future entries will list changed documents under the Framework Version.)**
+<!-- INSTRUCTIONS FOR MAINTAINERS:
+     When adding a new version entry, please use the output of the `date +%Y-%m-%d` command
+     for the date to ensure consistency. Place the newest version entry directly below
+     the '## [Unreleased]' heading.
+-->
+## [Unreleased]
+
+## [0.2.22] - 2025-05-10
+**Affected Document(s):**
+*   `coding-clippy/CLIPPY.md`
+
+**Summary of Changes:**
+Updated `Procedure: Ensure Sufficient File Context` in `CLIPPY.md` to strengthen the bias towards attempting full file reads when partial views might be insufficient for the task, aiming to improve contextual understanding before planning or editing.
+
+**Detailed Changes to `coding-clippy/CLIPPY.md`:**
+
+1.  **Modified `Procedure: Ensure Sufficient File Context` (Section 4):**
+    *   **Step 1 (Prioritize Complete View):** Added a sentence to explicitly state that when in doubt about the sufficiency of a partial view, the AI should default to attempting a full file read as per Step 2.
+    *   **Step 2 (Attempt Full File Read):** Rephrased to reinforce that this step is the default action when Step 1 indicates a need for more comprehensive context, especially when doubt exists regarding the adequacy of partial views.
+
+2.  **Toolkit Component Version Update:**
+    *   Incremented version in `CLIPPY.MD` from `v0.2.21` to `v0.2.22`.
+
+## [0.2.21] - 2025-05-10
+**Affected Document(s):**
+*   `coding-clippy/CLIPPY.md`
+
+**Summary of Changes:**
+Added a "Sustained Adherence Refocus" mandatory action at the beginning of the Planning Phase (Step 3) in `CLIPPY.md`. This requires the AI to explicitly state its commitment to re-evaluating and adhering to the full set of principles in `CLIPPY.md` before starting detailed planning for a new task or a new phase of an ongoing task. This aims to counteract focus drift during extended interactions.
+
+**Detailed Changes to `coding-clippy/CLIPPY.md`:**
+
+1.  **Added "Mandatory Refocus Before Planning" to Section 3 ("Pre-computation Standards Check (Planning Phase)")**:
+    *   Inserted a new instructional block before Step 3.0.
+    *   **Action:** Requires the AI to explicitly state: "**Sustained Adherence Refocus:** Actively re-evaluating and committing to the full set of principles and procedures within `AI_CODING_PROCESS.md` (this document) to ensure continued meticulous adherence for the upcoming planning and implementation."
+    *   **Rationale:** Serves as a deliberate internal prompt for the AI to refresh its attention to the comprehensive guidelines, counteracting potential focus drift and reinforcing rigorous process execution.
+
+2.  **Toolkit Component Version Update:**
+    *   Incremented version in `CLIPPY.MD` from `v0.2.20` to `v0.2.21`.
+
+## [0.2.20] - YYYY-MM-DD
+**Affected Document(s):**
+*   `coding-clippy/CLIPPY.md`
+
+**Summary of Changes:**
+Clarified AI turn management for Steps 4.1-4.3 (Propose, Pre-Verify, Apply) and reinforced that Step 4.4 (Post-Apply Verification) must verify the actual tool output diff, not the original proposal. This aims to improve AI adherence to the sequential verification process.
+
+**Detailed Changes to `coding-clippy/CLIPPY.md`:**
+
+1.  **Enhanced Step 4 ("Edit Generation & Verification Cycle") - "Sequential Execution and Autonomous Operation" subsection:**
+    *   Restructured to define an explicit two-turn process:
+        *   **Turn 1: Propose Edit (Step 4.1):** AI solely generates and presents the `code_edit` diff text.
+        *   **Turn 2: Pre-Verify Proposal & Initiate Apply (Steps 4.2 & 4.3):** AI performs pre-verification on the proposal from Turn 1, then issues the tool call.
+
+2.  **Enhanced Step 4.4 ("Post-Apply Verification (Mandatory After 4.3 Tool Call Result)")**:
+    *   Added a "CRITICAL INSTRUCTION FOR AI" at the beginning to conceptually discard memory of the proposed edit and focus exclusively on the tool's actual output diff.
+    *   Updated the "Purpose" and "Action" descriptions to emphasize that verification uses "ONLY the diff provided in the tool's output from Step 4.3".
+    *   Updated sub-steps `4.4.1.a` (Post-Reapply Verification) and `4.4.1.b` (Post-edit_file Verification) to explicitly state that the diff being verified is from the respective tool's output.
+
+3.  **Toolkit Component Version Update:**
+    *   Incremented version in `CLIPPY.MD` from `v0.2.19` to `v0.2.20`.
+
+## [0.2.19] - YYYY-MM-DD
+### Added
+- **MONOLITH_CLIPPY.md:** Added Step 3.1.1 ("Investigate Specified Refactoring Sources") to explicitly handle investigation of external source code mentioned in refactoring plans.
+- **MONOLITH_CLIPPY.md:** Added rule under "Work with Facts" Core Principle: "Plan Directives Override Ambiguous Tool Output" to prioritize plan instructions over potentially incomplete tool results.
+
+### Changed
+- **MONOLITH_CLIPPY.md:** Modified Step 3.1 ("Search for Existing Logic") to reference the new Step 3.1.1 for external source investigation.
+
+## [0.2.18] - 2024-07-17
+
+**Affected Document(s):**
+*   `coding-clippy/experimental/CLIPPY.MD` (Refactored & Moved)
+*   `coding-clippy/experimental/clippy_modules/01_GENERAL_WORKFLOW.md` (New & Moved)
+*   `coding-clippy/experimental/clippy_modules/02_REUSABLE_PROCEDURES.md` (New & Moved)
+*   `coding-clippy/experimental/clippy_modules/03_EXCEPTION_HANDLING.md` (New & Moved)
+*   `coding-clippy/experimental/clippy_modules/04_RUNTIME_ERROR_PROTOCOL.md` (New & Moved)
+*   `coding-clippy/experimental/clippy_modules/05_GLOSSARY.md` (New & Moved)
+*   `coding-clippy/experimental/clippy_modules/06_REFERENCES.md` (New & Moved)
+
+**Summary of Changes:**
+Major structural refactoring of the AI Coding Process documentation (`CLIPPY.MD`). The previously monolithic document has been modularized to improve AI manageability, maintainability, and clarity as the process grows in complexity. **These files were also moved to the `coding-clippy/experimental/` directory as the modularization is considered experimental and not yet fully functional.**
+
+**Detailed Changes:**
+
+1.  **`coding-clippy/experimental/CLIPPY.MD` Refactored & Moved:**
+    *   Now serves as a shorter "umbrella" document.
+    *   Retains the "Introduction & Goal" and "Core Principles & Critical Checks Summary".
+    *   Adds a new "Overall Process Structure" section explaining the modular design.
+    *   Updates the "Table of Contents" to point to new module files using relative links.
+    *   Removes the detailed content for sections moved to modules.
+    *   Toolkit Component Version updated to `v0.3.0`.
+
+2.  **New Module Files Created in `coding-clippy/experimental/clippy_modules/` (and Moved):**
+    *   `01_GENERAL_WORKFLOW.md`: Contains the detailed Steps 0-6 of the main coding workflow (previously Section 3).
+    *   `02_REUSABLE_PROCEDURES.md`: Contains the detailed Reusable Verification Procedures (previously Section 4).
+    *   `03_EXCEPTION_HANDLING.md`: Contains the detailed Exception Handling Procedures (previously Section 5).
+    *   `04_RUNTIME_ERROR_PROTOCOL.md`: Contains the detailed Protocol for Runtime Error Diagnosis and Resolution (previously Section 7).
+    *   `05_GLOSSARY.md`: Contains the Glossary of Key Terms (previously Section 6).
+    *   `06_REFERENCES.md`: Contains the References section (previously Section 8).
+
+**Reason for Changes:**
+To address concerns about the increasing size and complexity of the monolithic `CLIPPY.MD` potentially hindering AI processing and adherence. Modularization aims to improve context management, attention focus, maintainability, and scalability of the AI coding process documentation.
+
+---
+
+## Framework v0.2.18 - 2025-05-08
+
+**Affected Document(s):**
+*   `coding-prompts/CLIPPY.md`
+
+**Summary of Changes:**
+Added new sub-step `3.0.1` ("Verify Tool Output Congruence and Sufficiency") to `CLIPPY.md`'s planning phase to ensure AI explicitly verifies information-gathering tool outputs before use. Updated Table of Contents and Pre-computation Verification Summary accordingly.
+
+**Detailed Changes to `coding-prompts/CLIPPY.md`:**
+
+1.  **Added Step `3.0.1. Verify Tool Output Congruence and Sufficiency (After Information Gathering)`:**
+    *   Inserted after Step `3.0` in the "General Coding Workflow" (Section 3).
+    *   **Trigger:** Immediately after any information-gathering tool call (`read_file`, `grep_search`, etc.) within Step 3.
+    *   **Action:** Requires AI to:
+        *   Verify tool output aligns with request parameters (e.g., correct lines, no unexpected truncation).
+        *   Assess if output content is sufficient and clear for the immediate planning task.
+        *   Take corrective action (re-run tool, adjust parameters, clarify with user) if output is incongruent or insufficient.
+        *   Explicitly report the outcome of this verification.
+    *   Ensures data is validated before being used in subsequent planning steps.
+
+2.  **Updated `Pre-computation Verification Summary` (Step `3.10`):**
+    *   Added a new checklist item: `- [x/-] 7. Tool Output Verification:` to confirm Step `3.0.1` was performed for all tool outputs used in planning.
+
+3.  **Updated Table of Contents (Section 3):**
+    *   Added entries for `3.0. Assess Target File Complexity & Ensure Sufficient Context (Initial Check)`.
+    *   Added entries for the new `3.0.1. Verify Tool Output Congruence and Sufficiency (After Information Gathering)`.
+
+4.  **Version Bump:** Toolkit Component Version in `CLIPPY.md` updated to `v0.2.18`.
+
+**Reason for Changes:**
+To enhance the robustness of the AI's planning phase by ensuring that all information gathered from tools is explicitly checked for correctness, completeness (congruence with the request), and sufficiency for the task at hand *before* that information is used to make decisions or formulate further plans. This aims to prevent errors arising from acting on misunderstood, incomplete, or incongruent tool outputs.
+
+---
+
+## Framework v0.2.17 - 2025-05-08
+
+**Affected Document(s):**
+*   `coding-prompts/CLIPPY.md`
+
+**Summary of Changes:**
+Added "Protocol for Runtime Error Diagnosis and Resolution" (Section 7) to guide methodical debugging. Added "Handling Information Discrepancies" guidance to "Work with Facts" principle (Section 2). Added "Meta-Instruction on Reporting Detail" to ensure consistent reporting verbosity (Section 3). Updated Table of Contents and section numbering. (Note: Also includes Glossary section inadvertently added during prior edit).
+
+**Detailed Changes to `coding-prompts/CLIPPY.md`:**
+
+1.  **Added Section 7: "Protocol for Runtime Error Diagnosis and Resolution":**
+    *   Provides a structured protocol for diagnosing and fixing runtime errors, adapting the standard workflow (Steps 1-6).
+    *   Emphasizes methodical investigation, hypothesis testing, and robust fixes.
+    *   Requires explicit confirmation of resuming the original task post-fix.
+2.  **Enhanced "Work with Facts" Core Principle (Section 2):**
+    *   Added "Handling Information Discrepancies" subsection detailing how to manage conflicting data from tracebacks, logs, and tool outputs (e.g., `read_file`).
+3.  **Added "Meta-Instruction on Reporting Detail" (Section 3):**
+    *   Reinforces the requirement for consistent, explicit, and thorough reporting for all steps (1-6) across all task types (development, refactoring, debugging).
+4.  **Updated Table of Contents & Section Numbering:** Reflected addition of Section 7 and renumbering of References to Section 8.
+5.  **Retained Glossary (Section 6):** Includes Glossary section added as a side-effect of a previous edit attempt.
+6.  **Version Bump:** Toolkit Component Version updated to v0.2.17.
+
+**Reason for Changes:**
+Based on collaborative review and debugging experiences, these changes enhance `CLIPPY.MD`'s robustness by: providing a formal, rigorous protocol for handling runtime errors; improving guidance on managing conflicting information sources; and ensuring consistent reporting detail regardless of task type.
+
+---
+
+## Framework v0.2.16 - 2025-05-07
+
+**Affected Document(s):**
+*   `coding-prompts/CLIPPY.md`
+*   `coding-prompts/KNOWN_ISSUES.md`
+
+**Summary of Changes:**
+Enhanced `CLIPPY.md` to improve robustness against AI internal state inconsistencies after file reads. Added a pre-edit precondition check (Step 3.11), improved self-correction triggers (Step 4.4.3), and corrected procedure call site references. Documented related failure modes and experiences in `KNOWN_ISSUES.md`.
+
+**Detailed Changes to `coding-prompts/CLIPPY.md`:**
+
+1.  **Added Step `3.11 Verify Action Preconditions`:**
+    *   Introduced a new mandatory step before generating an edit (Step 4.1).
+    *   Requires the AI to explicitly re-verify the immediate preconditions for the planned action (e.g., existence of code to be deleted, non-existence of code to be added) against the latest file content.
+    *   If preconditions fail, the AI must STOP, report the discrepancy, and revise the plan.
+    *   The "IMMEDIATE NEXT ACTION" instruction to proceed to Step 4.1 was moved to after this step.
+
+2.  **Enhanced Step `4.4.3.b.c` (Triggers for Self-Correction):**
+    *   Added a new trigger (item `g.`): Self-correction is now also required if the `edit_file` or `reapply` tool reports "no changes were made" when the AI's plan expected modifications. This forces investigation into why the AI's understanding of the pre-edit state was incorrect.
+
+3.  **Updated Procedure Call Site References:**
+    *   Corrected section number references in Steps `4.4.1.a`, `4.4.1.b`, and `4.5` (item 1) to accurately point to the final de-duplicated locations of `Procedure: Verify Reapply Diff` (Section 4) and `Procedure: Verify Edit File Diff` (Section 4).
+
+**Detailed Changes to `coding-prompts/KNOWN_ISSUES.md`:**
+
+1.  **Revised Issue Entry ("AI's Internal File State Inconsistency..."):**
+    *   Updated the existing issue regarding `read_file` to more accurately reflect the core problem observed: the AI's internal model of a file can be inconsistent or outdated even after a purported full read, leading to erroneous conclusions.
+    *   Clarified the distinction between the tool's potentially misleading output display and the AI's internal state management failure.
+    *   Rewritten the "Recount of `CLIPPY.md` Experience" to highlight the AI's incorrect assertions about duplicate procedures persisting after full reads, and how targeted "no change" edits were needed to force correction.
+    *   Updated "Status/Mitigation" to include the need for better AI self-correction and state integrity checks.
+
+**Reason for Changes:**
+Stemming directly from a collaborative debugging and refactoring session of `CLIPPY.md`, these changes address several related issues:
+*   A subtle but critical AI failure mode where the AI claimed to have read the full file but repeatedly made incorrect conclusions about its content (specifically, the presence of already-deleted duplicates). This led to inefficient loops and highlighted the need for:
+    *   More rigorous pre-edit checks by the AI against the actual file state (new Step 3.11).
+    *   Explicit handling of "no changes made" edits as a signal of the AI's incorrect state understanding (new trigger in 4.4.3).
+    *   Clearer documentation of this failure mode and its nuances in `KNOWN_ISSUES.md`.
+*   Correction of internal cross-references within `CLIPPY.md` after confirming the correct de-duplicated locations of several procedures.
+
+---
+
+## Framework v0.2.15 - 2025-05-07
+
+**Affected Document(s):**
+*   `coding-prompts/CLIPPY.md`
+
+**Summary of Changes:**
+Further enhanced `CLIPPY.md` planning phase (Step 3) to include proactive consideration for the complexity of newly generated code, configuration needs, and resource management.
+
+**Detailed Changes to `coding-prompts/CLIPPY.md`:**
+
+1.  **Enhanced Step 3.2 (Identify Standards & Verify Alignment):
+    *   Added a directive for the AI to ensure that its plan for *newly generated code* (functions, methods, logic blocks) prioritizes simplicity (e.g., appropriate length, limited nesting, SRP) and includes proactive decomposition of inherently complex new units.
+
+2.  **Added Configuration Needs Check (Step 3.4.1.i):
+    *   Introduced a new sub-point requiring assessment of whether a change necessitates new configurable parameters, promoting their integration with existing config mechanisms and avoiding hardcoding.
+
+3.  **Added Resource Management Check (Step 3.4.1.j):
+    *   Introduced a new sub-point requiring the plan to detail how system resources (files, connections, etc.) will be properly acquired and consistently released, especially in error scenarios.
+
+4.  **Version Bump:** Toolkit Component Version updated to v0.2.15.
+
+---
+
+## Framework v0.2.14 - 2025-05-07
+
+**Affected Document(s):**
+*   `coding-prompts/CLIPPY.md`
+
+**Summary of Changes:**
+Added light-touch considerations for Testability and Observability to the planning phase (Step 3.4.1) of `CLIPPY.md`.
+
+**Detailed Changes to `coding-prompts/CLIPPY.md`:**
+
+1.  **Added Testability Check (Step 3.4.1.g):
+    *   Introduced a new sub-point requiring a brief assessment of whether the proposed code structure facilitates testing (e.g., dependency injection, structural clarity).
+
+2.  **Added Observability Check (Step 3.4.1.h):
+    *   Introduced a new sub-point requiring a brief assessment of whether the proposed change warrants new or updated logging or metrics for monitoring/diagnostics.
+
+3.  **Version Bump:** Toolkit Component Version in `CLIPPY.md` updated to `v0.2.14`.
+
+**Reason for Changes:**
+To encourage proactive consideration of non-functional aspects like testability and observability during the planning phase, promoting more robust and maintainable code design without adding significant cognitive overhead to the process.
+
+---
+
+## Framework v0.2.13 - 2025-05-07
+
+**Affected Document(s):**
+*   `coding-prompts/CLIPPY.md`
+
+**Summary of Changes:**
+Refined recent additions to `CLIPPY.md` to enhance language/framework agnosticism, particularly within `Procedure: Verify Framework Compatibility`.
+
+**Detailed Changes to `coding-prompts/CLIPPY.md`:**
+
+1.  **Made `Procedure: Verify Framework Compatibility` More Agnostic (Section 4):**
+    *   Replaced specific examples like "Typer/Click app callbacks, middleware" and "`ctx.obj`" with more general terms like "registered callback functions or handlers" and "execution context or shared state".
+    *   Generalized the example RuntimeWarning.
+    *   Removed specific library examples from Step 2 (Interaction Pattern Check) to keep it focused on the pattern itself.
+
+2.  **Version Bump:** Toolkit Component Version in `CLIPPY.md` updated to `v0.2.13`.
+
+**Reason for Changes:**
+To ensure the coding process remains broadly applicable across different technology stacks by removing potentially overly specific examples introduced in the previous version, while retaining the core principles of the checks.
+
+---
+
+## Framework v0.2.12 - 2025-05-07
+
+**Affected Document(s):**
+*   `coding-prompts/CLIPPY.md`
+
+**Summary of Changes:**
+Enhanced `CLIPPY.md` to improve verification of framework interactions. This includes: emphasizing root cause analysis for framework warnings, requiring explicit verification of implicit framework behavior assumptions, and strengthening checks for framework callback compatibility (especially concerning async/sync changes and context propagation).
+
+**Detailed Changes to `coding-prompts/CLIPPY.md`:**
+
+1.  **Strengthened `Procedure: Verify Framework Compatibility` (Section 4):**
+    *   Appended detailed clarification for verifying framework invocation of *callbacks*. This includes focusing on synchronicity changes (`sync`/`async`), context propagation (like `ctx.obj`), how `async` callbacks are awaited, and treating framework `RuntimeWarning`s (e.g., 'coroutine ... was never awaited') as critical indicators requiring immediate investigation.
+
+2.  **Added Emphasis to "Root Cause Analysis" for Framework Warnings (Step 3.4):**
+    *   Inserted a new note under "Step 3.4: Check 'Robust Solutions'" to prioritize understanding and resolving the *source of framework `RuntimeWarning`s* themselves, as they often point to the true root cause of subsequent errors.
+
+3.  **Refined `Procedure: Verify Hypothesis` for Implicit Framework Behaviors (Section 4):**
+    *   Added a note emphasizing that assumptions about implicit framework behaviors (e.g., automatic awaiting of async functions, context availability in subcommands) **MUST** be explicitly stated and verified (ideally against documentation or minimal examples).
+
+4.  **Version Bump:** Toolkit Component Version in `CLIPPY.md` updated to `v0.2.12`.
+
+**Reason for Changes:**
+To make the AI coding process more robust when dealing with framework-specific behaviors, particularly concerning the integration of asynchronous code (like callbacks) and ensuring correct context propagation. These changes are based on lessons learned from a CLI refactoring scenario where subtle framework interactions led to debugging challenges.
 
 ---
 
@@ -152,7 +451,7 @@ These updates stem from a CLI refactoring session where issues arose from: a pla
 *   `coding-prompts/AI_CODING_PROCESS.md`
 
 **Summary of Changes:**
-Enhanced the AI coding process to improve proactive assessment of existing code patterns, reconciliation of plans with partially modified codebases, handling of plan assumptions, and clarification of "plan" references.
+Enhanced AI coding process to improve proactive assessment of existing code patterns, reconciliation of plans with partially modified codebases, handling of plan assumptions, and clarification of "plan" references.
 
 **Detailed Changes to `coding-prompts/AI_CODING_PROCESS.md`:**
 
