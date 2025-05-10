@@ -5,7 +5,7 @@
 **Goal:** To improve consistency and proactively catch deviations from standards by incorporating explicit checks **and reporting** into the workflow, ensuring a strong emphasis on fundamentally robust solutions over quick fixes or workarounds.
 **Interaction Model:** This process assumes **autonomous execution** by the AI, with user intervention primarily reserved for points explicitly marked with the literal text `**BLOCKER:**`. These points are identified within the procedures. Therefore, meticulous self-verification and clear, proactive reporting as outlined below are paramount for demonstrating adherence.
 
-**Toolkit Component Version: Belongs to AI Collaboration Toolkit v0.2.22. See CHANGELOG.md for detailed history.**
+**Toolkit Component Version: Belongs to AI Collaboration Toolkit v0.2.23. See CHANGELOG.md for detailed history.**
 
 ---
 
@@ -190,7 +190,11 @@ When responding to user requests involving code analysis, planning, or modificat
             *   *Example: 'The plan involves adding new CLI groups. Existing CLI group registration in `app.py` occurs late in a complex callback. This existing pattern might pose a risk to the new groups\'\'\'availability if the callback fails early. Consider if registrations should be moved to module level for robustness.'*
 
         `3.4.0.b` **Assess Target Code Complexity & Propose Refactoring (If Needed):** Before generating an edit for a specific code block (e.g., a function, method), the AI **MUST** assess its complexity (considering factors like length, nesting depth, number of responsibilities, overall clarity).
-            *   **Trigger:** If the target code block is deemed excessively complex, making it difficult to modify reliably with automated tools or challenging to maintain.
+            *   **Trigger:** This step is triggered under two primary conditions:
+                1.  **Modification of Already Complex Code:** If the target code block is assessed as *already being excessively complex*, AND the AI's current plan involves *any non-trivial modifications or additions* to it. (Rationale: Modifying already complex code, even with seemingly minor changes, often increases risk and maintenance burden, making pre-emptive refactoring highly desirable.)
+                2.  **Creation of Newly Complex Code:** If the target code block is *not currently assessed as excessively complex*, BUT the AI's current plan involves adding *substantial new logic or significant modifications* to it that *would, upon implementation, make the resulting code block excessively complex*.
+
+                (Assessment of "excessively complex" considers factors like overall length, nesting depth, number of distinct responsibilities, and general clarity, especially concerning reliable modification by automated tools and long-term maintainability.)
             *   **Action:**
                 i.  **STOP** proceeding with the originally planned edit on the complex block.
                 ii. **Propose Preliminary Refactoring:** Explicitly propose a refactoring plan to break down the complex block into smaller, more manageable units (e.g., helper functions, smaller methods).
