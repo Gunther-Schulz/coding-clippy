@@ -5,7 +5,7 @@
 
 ## 1. Introduction
 
-This document outlines the core coding principles, style guidelines, and development practices that **MUST** be followed by all contributors to this project. Adherence ensures code quality, consistency, maintainability, and robustness. This document complements `PROJECT_ARCHITECTURE.md`, which details specific technical patterns and structures.
+This document outlines the core coding principles, style guidelines, and development practices that **MUST** be followed by all contributors to this project. Adherence ensures code quality, consistency, maintainability, and robustness. This document complements `PROJECT_ARCHITECTURE.md`, which details project-specific technical patterns and structures. **The AI Assistant's operational process for adhering to these general standards and any project-specific architecture is detailed in `CLIPPY.md`.**
 
 ## 2. Core Principles
 
@@ -16,6 +16,8 @@ This document outlines the core coding principles, style guidelines, and develop
 *   **Maintainability:** Write code that is easy to modify, debug, and extend. Follow established patterns and keep components loosely coupled.
 *   **Testability:** Design code with testing in mind. Ensure components can be easily unit-tested and integration-tested.
 *   **Consistency:** Adhere to the standards outlined in this document and the patterns in `PROJECT_ARCHITECTURE.md` to maintain a consistent codebase.
+
+**Note:** The AI Assistant is expected to follow the procedures outlined in `CLIPPY.md` to ensure these principles are met, including specific verification, fact-checking, and planning steps to promote robust and correct implementations.
 
 ## 3. Code Style & Formatting
 
@@ -30,7 +32,12 @@ This document outlines the core coding principles, style guidelines, and develop
     *   Use absolute imports for local modules where possible (e.g., `from logtailer.core.models import LogEntry`) unless relative imports significantly improve clarity within closely related submodules.
 *   **Line Length:** Maximum 100 characters.
 
-## 4. Naming Conventions
+## 4. Code Quality & Correctness
+
+*   **Function/Method Conciseness:** Functions and methods should be kept concise, focused on a single responsibility, and avoid excessive nesting. Aim for shorter, understandable units; consider refactoring or decomposing if they become overly long or complex. The AI Assistant includes planning steps to promote this (refer to `CLIPPY.md`, e.g., Steps 3.2, 3.4.0.b, and potential additions like the conciseness check in Step 4.2.1).
+*   **DRY Principle (Don't Repeat Yourself):** Avoid code duplication. Actively seek to reuse existing logic. The AI Assistant includes steps to search for existing implementations (refer to `CLIPPY.md`, e.g., Step 3.1).
+
+## 5. Naming Conventions
 
 *   **Modules:** `lowercase_with_underscores.py`
 *   **Packages:** `lowercase_with_underscores`
@@ -40,7 +47,7 @@ This document outlines the core coding principles, style guidelines, and develop
 *   **Constants:** `ALL_CAPS_WITH_UNDERSCORES` (e.g., `DEFAULT_TIMEOUT`, `MAX_RETRIES`)
 *   **Private Members:** Use a single leading underscore (`_private_method`, `_internal_state`) for internal implementation details. Avoid `__double_leading_underscore` unless necessary for name mangling in inheritance scenarios.
 
-## 5. Error Handling & Logging
+## 6. Error Handling & Logging
 
 *   **Philosophy:** Fail fast and explicitly. Catch exceptions where they can be meaningfully handled or appropriately logged and re-raised. Avoid catching generic `Exception` unless absolutely necessary and documented.
 *   **Custom Exceptions:** Define specific custom exceptions inheriting from base exception classes (e.g., `ProviderError`, `ValidationError`) in the relevant domain or application layer. See `PROJECT_ARCHITECTURE.md` for hierarchy examples.
@@ -50,7 +57,7 @@ This document outlines the core coding principles, style guidelines, and develop
     *   Use appropriate log levels: `DEBUG` for detailed diagnostics, `INFO` for operational messages, `WARNING` for potential issues, `ERROR` for runtime errors, `CRITICAL` for severe errors.
     *   Avoid logging sensitive information (passwords, API keys).
 
-## 6. Testing
+## 7. Testing
 
 *   **Framework:** `pytest`
 *   **Requirement:** All new features and bug fixes **MUST** include corresponding tests (unit and/or integration).
@@ -59,14 +66,14 @@ This document outlines the core coding principles, style guidelines, and develop
 *   **Test Location:** Tests reside in the `tests/` directory, mirroring the main application's structure (e.g., `tests/core/test_models.py` tests `logtailer/core/models.py`).
 *   **Assertions:** Use clear and specific `pytest` assertions.
 
-## 7. Documentation
+## 8. Documentation
 
 *   **Docstrings:** All public modules, classes, functions, and methods **MUST** have docstrings following the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings).
 *   **READMEs:** Maintain clear `README.md` files at the project root and potentially within complex sub-packages.
 *   **Architecture:** Key architectural decisions and patterns are documented in `PROJECT_ARCHITECTURE.md`.
 *   **Inline Comments:** Use sparingly for explaining complex or non-obvious logic. Avoid comments that merely restate the code.
 
-## 8. Dependency Management
+## 9. Dependency Management
 
 *   **Environment Management:** Python's built-in `venv` module is recommended for creating isolated virtual environments.
     ```bash
@@ -105,13 +112,13 @@ This document outlines the core coding principles, style guidelines, and develop
         pip freeze > requirements.txt
         ```
 
-## 9. Security
+## 10. Security
 
 *   **Input Validation:** Always validate and sanitize external input (API requests, user input, file contents). Use Pydantic models for data validation where applicable.
 *   **Secrets Management:** **NEVER** commit secrets (API keys, passwords, credentials) directly into the codebase. Use environment variables or a dedicated secrets management solution (e.g., HashiCorp Vault, AWS Secrets Manager), accessed via configuration.
 *   **Dependencies:** Keep dependencies up-to-date to patch known vulnerabilities. Regularly review dependency licenses.
 
-## 10. Version Control (Git)
+## 11. Version Control (Git)
 
 *   **Branching Model:** Use a feature-branch workflow (e.g., Gitflow or GitHub Flow). Create branches from `development` or `main` for new features or fixes.
 *   **Commit Messages:** Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification (e.g., `feat: add new provider API client`, `fix: correct odds calculation error`).
@@ -123,6 +130,16 @@ This document outlines the core coding principles, style guidelines, and develop
     *   All CI checks (linting, testing) **MUST** pass before merging.
 *   **Merging:** Use squash merges or rebase merges to maintain a clean commit history on the main branches.
 
-## 11. Pre-commit Hooks
+## 12. Pre-commit Hooks
 
 *   Use `pre-commit` hooks defined in `.pre-commit-config.yaml` to automatically run checks (e.g., formatting, linting) before commits are created. Ensure hooks are installed (`pre-commit install`).
+
+## 13. Implementation Workflow Guidance
+
+*Note: The following is high-level guidance. Project-specific workflows may vary. The AI Assistant follows its own detailed, mandatory operational workflow outlined in `CLIPPY.md` for all coding tasks.*
+
+1.  Understand requirements and refer to `PROJECT_ARCHITECTURE.MD` for design patterns.
+2.  Define necessary interfaces or use existing ones.
+3.  Implement components, ensuring they adhere to standards for DI, configuration, logging, etc.
+4.  Write comprehensive tests.
+5.  Ensure documentation (docstrings, READMEs) is updated.
